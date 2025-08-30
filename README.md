@@ -22,15 +22,15 @@ De esta manera el sistema se adapta tanto a las condiciones de iluminación del 
 <p align="center">
 <img width="755" height="455" alt="image" src="https://github.com/user-attachments/assets/e0841a08-b6ef-4422-9173-0b157ed62b0b" />
 
-L: Sensor Fotoelectrico.
-S1: Sensor Fin de carrera en la posicion superior.
-S2: Sensor Fin de carrera en la posicion media.
-S3: Sensor Fin de carrera en la posicion baja.
-A: Modo Automatico (A=1 activado ; A=0 desactivado, modo manual).
-Sub: Pulsador para subir en Manual.
-Baj: ulsador para bajar en Manual.
+* L: Sensor Fotoelectrico.
+* S1: Sensor Fin de carrera en la posicion superior.
+* S2: Sensor Fin de carrera en la posicion media.
+* S3: Sensor Fin de carrera en la posicion baja.
+* A: Modo Automatico (A=1 activado ; A=0 desactivado, modo manual).
+* Sub: Pulsador para subir en Manual.
+* Baj: ulsador para bajar en Manual.
 
-La placa LPC845-BRK (con el microcontrolador NXP LPC845M301) dispone de un Conversor Analógico-Digital (ADC) de 10 bits, lo que significa que convierte la señal analógica en un valor digital comprendido entre 0 y 1023, donde:
+* La placa LPC845-BRK (con el microcontrolador NXP LPC845M301) dispone de un Conversor Analógico-Digital (ADC) de 10 bits, lo que significa que convierte la señal analógica en un valor digital comprendido entre 0 y 1023, donde:
     * 0 – 300	Noche / muy poca luz.
     * 301 – 700	Luz intermedia / tarde.
     * 701 – 1023	Mucha luz / día.
