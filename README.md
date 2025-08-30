@@ -31,7 +31,7 @@ De esta manera el sistema se adapta tanto a las condiciones de iluminación del 
 - Baj: ulsador para bajar en Manual.
 
 La placa LPC845-BRK (con el microcontrolador NXP LPC845M301) dispone de un Conversor Analógico-Digital (ADC) de 10 bits, lo que significa que convierte la señal analógica en un valor digital comprendido entre 0 y 1023, donde:
-    -- 0 – 300	Noche / muy poca luz.
+    - 0 – 300	Noche / muy poca luz.
     - 301 – 700	Luz intermedia / tarde.
     - 701 – 1023	Mucha luz / día.
     
