@@ -1,2 +1,3 @@
 # Proyecto---Informatica-2
-<img width="543" height="380" alt="PCB 3D 1" src="https://github.com/user-attachments/assets/9e5f1003-48c7-4fb1-9469-a1c887b240c7" />
+<img width="755" height="455" alt="image" src="https://github.com/user-attachments/assets/e0841a08-b6ef-4422-9173-0b157ed62b0b" />
+
