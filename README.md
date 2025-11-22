@@ -35,3 +35,6 @@ La placa LPC845-BRK (con el microcontrolador NXP LPC845M301) dispone de un Conve
 * 301 – 700	Luz intermedia / tarde.
 * 701 – 1023	Mucha luz / día.
     
+## Simulación en Proteus
+---
+<img width="819" height="576" alt="image" src="https://github.com/user-attachments/assets/1983e8c2-3293-45c2-89db-3d587ac4aced" />
