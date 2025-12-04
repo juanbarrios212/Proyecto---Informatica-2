@@ -1,18 +1,21 @@
-#include "mylib.h"
+#include "conf.h"
 
-int main(void) {
-    // Inicialización del sistema
-    entradas_t in, last = {0};
-    posicion_t pos = POS_BAJA;       
-    estado_t estado = f_inicio();    
+int main(void){
+    init_mcu();
+    estado_t est = INICIO;
 
-    while(1) {
-        in = leer_entradas();             
-        estado = f_control(in, &pos, &last); 
-        last = in;                        
-        _delay_ms(50);                    
+    estado_t (*fsm[])(void) = {
+        e_inicio,
+        e_manual_stop,
+        e_manual_subiendo,
+        e_manual_bajando,
+        e_auto_stop,
+        e_auto_subiendo,
+        e_auto_bajando
+    };
+
+    while(1){
+        est = fsm[est]();
     }
-
-    return 0;
 }
 
