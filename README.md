@@ -30,7 +30,7 @@ De esta manera el sistema se adapta tanto a las condiciones de iluminación del 
 - Sub: Pulsador para subir en Manual.
 - Baj: ulsador para bajar en Manual.
 
-La placa LPC845-BRK (con el microcontrolador NXP LPC845M301) dispone de un Conversor Analógico-Digital (ADC) de 10 bits, lo que significa que convierte la señal analógica en un valor digital comprendido entre 0 y 1023, donde:
+El Atmega128 dispone de un Conversor Analógico-Digital (ADC) de 10 bits, lo que significa que convierte la señal analógica en un valor digital comprendido entre 0 y 1023, donde:
 * 0 – 300	Noche / muy poca luz.
 * 301 – 700	Luz intermedia / tarde.
 * 701 – 1023	Mucha luz / día.
@@ -38,4 +38,5 @@ La placa LPC845-BRK (con el microcontrolador NXP LPC845M301) dispone de un Conve
 ## Simulación en Proteus
 ---
 <p align="center">
-<img width="819" height="576" alt="image" src="https://github.com/user-attachments/assets/1983e8c2-3293-45c2-89db-3d587ac4aced" />
+<img width="1181" height="601" alt="image" src="https://github.com/user-attachments/assets/044272e1-fd61-403a-8b5a-9d352c825dc1" />
+
