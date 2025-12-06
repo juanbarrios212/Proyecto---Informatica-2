@@ -17,6 +17,7 @@ En este modo, el usuario podrá controlar la persiana mediante dos pulsadores: S
     - Si está en posición media y se presiona SUBIR, pasará a la posición alta.
     - Si está en posición alta y se presiona BAJAR, se moverá a la posición media.
     - Si está en posición media y se presiona BAJAR, pasará a la posición baja.
+
 De esta manera el sistema se adapta tanto a las condiciones de iluminación del entorno como a las necesidades específicas del usuario.
 
 <p align="center">
