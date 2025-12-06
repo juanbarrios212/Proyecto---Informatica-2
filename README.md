@@ -23,12 +23,12 @@ De esta manera el sistema se adapta tanto a las condiciones de iluminación del 
 <img width="755" height="455" alt="image" src="https://github.com/user-attachments/assets/e0841a08-b6ef-4422-9173-0b157ed62b0b" />
 
 - L: Sensor Fotoelectrico.
-- S1: Sensor Fin de carrera en la posicion superior.
-- S2: Sensor Fin de carrera en la posicion media.
-- S3: Sensor Fin de carrera en la posicion baja.
-- A: Modo Automatico (A=1 activado ; A=0 desactivado, modo manual).
-- Sub: Pulsador para subir en Manual.
-- Baj: ulsador para bajar en Manual.
+- S1: Sensor Fin de carrera en la posicion superior N/A.
+- S2: Sensor Fin de carrera en la posicion media N/A.
+- S3: Sensor Fin de carrera en la posicion baja N/A.
+- A: Modo Automatico (A=1 activado ; A=0 desactivado, modo manual). Selectora de dos posiciones.
+- Sub: Pulsador para subir en Manual N/A.
+- Baj: ulsador para bajar en Manual N/A.
 
 El Atmega128 dispone de un Conversor Analógico-Digital (ADC) de 10 bits, lo que significa que convierte la señal analógica en un valor digital comprendido entre 0 y 1023, donde:
 * 0 – 300	Noche / muy poca luz.
