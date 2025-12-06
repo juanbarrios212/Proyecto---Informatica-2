@@ -1,83 +1,117 @@
 #include "conf.h"
 
-//posición actual
-static int posicion_actual(void){
-    if (PIN_S1) return 1;
-    if (PIN_S2) return 2;
-    return 3;
+static int destino_manual = 0; 
+
+//ESTADO INICIO
+estado_t e_inicio(void)
+{
+    motor_stop();
+    return ESPERA;
 }
 
-//leer luz
-static int nivel_luz(void){
-    uint16_t adc = leer_adc();
+//ESTADO ESPERA
+estado_t e_espera(void)
+{
+    motor_stop();
+    leer_sensores_luz();
 
-    if (adc < 300) return 3;
-    if (adc < 700) return 2;
-    return 1;
+    int A = LEER_MODO_AUTO; 
+    int S1 = LEER_S1;
+    int S2 = LEER_S2;
+    int S3 = LEER_S3;
+    int L = valor_luz;
+    int Pulsador_Subir = LEER_BTN_SUB;
+    int Pulsador_Bajar = LEER_BTN_BAJ;
+
+   //funcionamiento en modo automatico
+    if (A == 1)
+    {
+        if (L > UMBRAL_DIA && S2 == 1) return SUBIR;
+        if (L > UMBRAL_DIA && S3 == 1) return SUBIR;
+        if (L > UMBRAL_NOCHE && L <= UMBRAL_DIA && S3 == 1) return SUBIR;
+        if (L <= UMBRAL_NOCHE && S2 == 1) return BAJAR;
+        if (L <= UMBRAL_NOCHE && S1 == 1) return BAJAR;
+        if (L > UMBRAL_NOCHE && L <= UMBRAL_DIA && S1 == 1) return BAJAR;
+    }
+    
+   //funionamiento en modo manual
+    else 
+    {
+        if (Pulsador_Subir == 1)
+        {
+            if (S3 == 1) { destino_manual = 2; return SUBIR; }
+            if (S2 == 1) { destino_manual = 1; return SUBIR; }
+        }
+        if (Pulsador_Bajar == 1)
+        {
+            if (S1 == 1) { destino_manual = 2; return BAJAR; }
+            if (S2 == 1) { destino_manual = 3; return BAJAR; }
+        }
+    }
+
+    return ESPERA;
 }
 
-estado_t e_inicio(void){
-    accion_t ac = {0,0};
-    driver_ejecutar(ac);
-    return MANUAL_STOP;
+//ESTADO SUBIR
+estado_t e_subir(void)
+{
+    motor_subir();
+    leer_sensores_luz();
+    
+    int A = LEER_MODO_AUTO;
+    int S1 = LEER_S1;
+    int S2 = LEER_S2;
+    int S3 = LEER_S3;
+    int L = valor_luz;
+
+    if (S1 == 1 && A == 0) return ESPERA; 
+
+   //parada en modo automatico
+    if (A == 1)
+    {
+        if (L > UMBRAL_DIA && S1 == 1) return ESPERA;
+        if (L > UMBRAL_NOCHE && L <= UMBRAL_DIA && S2 == 1) return ESPERA;
+        if (L <= UMBRAL_NOCHE) return ESPERA; 
+    }
+
+   //parada en modo manual
+    if (A == 0)
+    {
+        if (destino_manual == 2 && S2 == 1) return ESPERA;
+        if (destino_manual == 1 && S1 == 1) return ESPERA;
+    }
+
+    return SUBIR;
 }
 
-estado_t e_manual_stop(void){
-    accion_t ac = {0,0};
-    driver_ejecutar(ac);
+//ESTADO BAJAR
+estado_t e_bajar(void)
+{
+    motor_bajar();
+    leer_sensores_luz();
+    
+    int A = LEER_MODO_AUTO;
+    int S1 = LEER_S1;
+    int S2 = LEER_S2;
+    int S3 = LEER_S3;
+    int L = valor_luz;
 
-    if (PIN_MODO) return AUTO_STOP;
+    if (S3 == 1 && A == 0) return ESPERA;
 
-    int pos = posicion_actual();
+   // parada en modo automatico
+    if (A == 1)
+    {
+        if (L <= UMBRAL_NOCHE && S3 == 1) return ESPERA;
+        if (L > UMBRAL_NOCHE && L <= UMBRAL_DIA && S2 == 1) return ESPERA;
+        if (L > UMBRAL_DIA) return ESPERA;
+    }
 
-    if (driver_leer().up && pos > 1) return MANUAL_SUBIENDO;
-    if (driver_leer().down && pos < 3) return MANUAL_BAJANDO;
+   //parada en modo manual
+    if (A == 0)
+    {
+        if (destino_manual == 2 && S2 == 1) return ESPERA;
+        if (destino_manual == 3 && S3 == 1) return ESPERA;
+    }
 
-    return MANUAL_STOP;
-}
-
-estado_t e_manual_subiendo(void){
-    accion_t ac = {1,0};
-    driver_ejecutar(ac);
-
-    if (PIN_S1) return MANUAL_STOP;
-    return MANUAL_SUBIENDO;
-}
-
-estado_t e_manual_bajando(void){
-    accion_t ac = {0,1};
-    driver_ejecutar(ac);
-
-    if (PIN_S3) return MANUAL_STOP;
-    return MANUAL_BAJANDO;
-}
-
-estado_t e_auto_stop(void){
-    accion_t ac = {0,0};
-    driver_ejecutar(ac);
-
-    if (!PIN_MODO) return MANUAL_STOP;
-
-    int deseada = nivel_luz();
-    int actual = posicion_actual();
-
-    if (deseada < actual) return AUTO_BAJANDO;
-    if (deseada > actual) return AUTO_SUBIENDO;
-    return AUTO_STOP;
-}
-
-estado_t e_auto_subiendo(void){
-    accion_t ac = {1,0};
-    driver_ejecutar(ac);
-
-    if (PIN_S1 || !PIN_MODO) return AUTO_STOP;
-    return AUTO_SUBIENDO;
-}
-
-estado_t e_auto_bajando(void){
-    accion_t ac = {0,1};
-    driver_ejecutar(ac);
-
-    if (PIN_S3 || !PIN_MODO) return AUTO_STOP;
-    return AUTO_BAJANDO;
+    return BAJAR;
 }
