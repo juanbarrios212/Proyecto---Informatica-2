@@ -1,21 +1,16 @@
 #include "conf.h"
 
-int main(void){
+int valor_luz = 0;
+
+int main(void)
+{
     init_mcu();
-    estado_t est = INICIO;
-
-    estado_t (*fsm[])(void) = {
-        e_inicio,
-        e_manual_stop,
-        e_manual_subiendo,
-        e_manual_bajando,
-        e_auto_stop,
-        e_auto_subiendo,
-        e_auto_bajando
-    };
-
-    while(1){
-        est = fsm[est]();
+    estado_t estado_actual = INICIO;
+    estado_t (*tabla_estados[])(void) = {e_inicio, e_espera, e_subir, e_bajar};
+   
+    while(1)
+    {
+        estado_actual = (*tabla_estados[estado_actual])();
     }
+    return 0;
 }
-
