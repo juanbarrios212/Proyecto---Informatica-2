@@ -36,8 +36,10 @@ El Atmega128 dispone de un Conversor Analógico-Digital (ADC) de 10 bits, lo que
 * 301 – 700	Luz intermedia / tarde.
 * 701 – 1023	Mucha luz / día.
     
-## Simulación en Proteus
+## Esquemático en Proteus
 ---
 <p align="center">
 <img width="1181" height="601" alt="image" src="https://github.com/user-attachments/assets/044272e1-fd61-403a-8b5a-9d352c825dc1" />
+
+## Simulación en Proteus
 
