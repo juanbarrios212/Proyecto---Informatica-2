@@ -42,4 +42,5 @@ El Atmega128 dispone de un Conversor Analógico-Digital (ADC) de 10 bits, lo que
 <img width="1181" height="601" alt="image" src="https://github.com/user-attachments/assets/044272e1-fd61-403a-8b5a-9d352c825dc1" />
 
 ## Simulación en Proteus
-
+---
+https://youtu.be/3rIOhI_rngk
